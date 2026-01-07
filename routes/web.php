@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Dashboard\ContactController as DashboardContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,4 +67,10 @@ Route::middleware('auth')->group(function () {
             )
         )
         ->name('two-factor.show');
+});
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/dashboard/contatos', [DashboardContactController::class, 'index'])
+        ->name('dashboard.contacts');
+
 });
