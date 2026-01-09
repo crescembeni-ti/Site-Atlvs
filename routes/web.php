@@ -10,15 +10,14 @@ use App\Http\Controllers\Dashboard\ContactController as DashboardContactControll
 |--------------------------------------------------------------------------
 | Site Institucional - ATLVS
 |--------------------------------------------------------------------------
+| AQUI ESTAVA O PROBLEMA: Mudei de 'home' para 'welcome'
 */
-Route::view('/', 'home')->name('home');
+Route::view('/', 'welcome')->name('home');
 
 /*
 |--------------------------------------------------------------------------
 | Contato (Landing Page)
 |--------------------------------------------------------------------------
-| GET: redireciona para âncora
-| POST: envia formulário
 */
 Route::get('/contato', function () {
     return redirect('/#contato');
@@ -68,6 +67,7 @@ Route::middleware('auth')->group(function () {
         )
         ->name('two-factor.show');
 });
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard/contatos', [DashboardContactController::class, 'index'])
