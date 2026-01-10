@@ -23,8 +23,9 @@
                 </p>
             </div>
 
+            {{-- MENSAGEM DE SUCESSO --}}
             @if (session('success'))
-                <div class="max-w-4xl mx-auto mb-8 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center gap-3">
+                <div class="max-w-4xl mx-auto mb-8 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 flex items-center gap-3 animate-fade-in-up">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     <div>
                         <span class="font-bold block">Recebemos sua mensagem!</span>
@@ -42,31 +43,39 @@
                         @csrf
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {{-- NOME --}}
                             <div class="space-y-2">
                                 <label for="name" class="text-sm font-medium text-zinc-400 ml-1">Nome Completo</label>
-                                <input type="text" name="name" id="name" required placeholder="Ex: João Silva" 
-                                    class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner">
+                                <input type="text" name="name" id="name" required value="{{ old('name') }}" placeholder="Ex: João Silva" 
+                                    class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner @error('name') border-red-500 @enderror">
+                                @error('name') <span class="text-red-400 text-xs ml-1">{{ $message }}</span> @enderror
                             </div>
+
+                            {{-- EMPRESA --}}
                             <div class="space-y-2">
                                 <label for="company" class="text-sm font-medium text-zinc-400 ml-1">Empresa</label>
-                                <input type="text" name="company" id="company" placeholder="Ex: ATLVS Tecnologia" 
+                                <input type="text" name="company" id="company" value="{{ old('company') }}" placeholder="Ex: ATLVS Tecnologia" 
                                     class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner">
                             </div>
                         </div>
 
+                        {{-- EMAIL --}}
                         <div class="space-y-2">
                             <label for="email" class="text-sm font-medium text-zinc-400 ml-1">E-mail Corporativo</label>
-                            <input type="email" name="email" id="email" required placeholder="voce@suaempresa.com" 
-                                class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner">
+                            <input type="email" name="email" id="email" required value="{{ old('email') }}" placeholder="voce@suaempresa.com" 
+                                class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner @error('email') border-red-500 @enderror">
+                            @error('email') <span class="text-red-400 text-xs ml-1">{{ $message }}</span> @enderror
                         </div>
 
+                        {{-- MENSAGEM --}}
                         <div class="space-y-2">
                             <label for="message" class="text-sm font-medium text-zinc-400 ml-1">Detalhes do Projeto</label>
                             <textarea name="message" id="message" rows="5" required placeholder="Descreva brevemente sua necessidade técnica ou de negócio..." 
-                                class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner resize-none"></textarea>
+                                class="w-full bg-zinc-950/50 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner resize-none @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+                            @error('message') <span class="text-red-400 text-xs ml-1">{{ $message }}</span> @enderror
                         </div>
 
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-blue-900/20 transform hover:-translate-y-0.5 border border-blue-500/20">
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-blue-900/20 transform hover:-translate-y-0.5 border border-blue-500/20 cursor-pointer">
                             Iniciar Conversa
                         </button>
                     </form>
