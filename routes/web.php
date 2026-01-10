@@ -9,6 +9,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\ProjectCommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::get('/projetos', [App\Http\Controllers\Admin\ProjectController::class, 'index'])->name('admin.projects.index');
     Route::get('/projetos/{project}', [App\Http\Controllers\Admin\ProjectController::class, 'show'])->name('admin.projects.show');
     Route::put('/projetos/{project}', [App\Http\Controllers\Admin\ProjectController::class, 'update'])->name('admin.projects.update');
+    Route::post('/projetos/{project}/comentarios', [ProjectCommentController::class, 'store'])->name('projects.comments.store');
 
 });
 
