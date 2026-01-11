@@ -9,6 +9,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController; // Controller do Cliente
 use App\Http\Controllers\ProjectCommentController;
+use App\Http\Controllers\FinanceiroController;
+use App\Http\Controllers\ContratosController;
 
 // Controllers do Admin
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
@@ -95,13 +97,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/meus-projetos/novo', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/meus-projetos', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/meus-projetos/{project}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::get('/meus-chamados', [App\Http\Controllers\TicketController::class, 'index'])->name('tickets.index');
-    Route::get('/meus-chamados/novo', [App\Http\Controllers\TicketController::class, 'create'])->name('tickets.create');
-    Route::post('/meus-chamados', [App\Http\Controllers\TicketController::class, 'store'])->name('tickets.store');
-    Route::get('/meus-chamados/{ticket}', [App\Http\Controllers\TicketController::class, 'show'])->name('tickets.show');
-    Route::post('/meus-chamados/{ticket}/reply', [App\Http\Controllers\TicketController::class, 'reply'])->name('tickets.reply');
 });
-
+    
 
 /*
 |--------------------------------------------------------------------------

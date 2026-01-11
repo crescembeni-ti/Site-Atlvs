@@ -46,8 +46,19 @@
 
                     <flux:navlist.group :heading="__('Gestão')" class="grid mt-4 text-slate-400">
                         <flux:navlist.item icon="briefcase" :href="route('projects.index')" :current="request()->routeIs('projects.*')" wire:navigate>{{ __('Meus Projetos') }}</flux:navlist.item>
-                        <flux:navlist.item icon="banknotes" href="#">{{ __('Financeiro') }}</flux:navlist.item>
-                        <flux:navlist.item icon="document-text" href="#">{{ __('Contratos') }}</flux:navlist.item>
+
+                       <flux:navlist.item icon="briefcase"
+                           :href="route('gestao.financeiro.index')"
+                            :current="request()->routeIs('gestao.financeiro.*')" wire:navigate>{{ __('Financeiro') }}
+                    </flux:navlist.item>
+
+                        <flux:navlist.item
+                        icon="briefcase"
+                        :href="route('gestao.contratos.index')"
+                        :current="request()->routeIs('gestao.contratos.*')"
+                        wire:navigate >{{ __('Contratos') }}
+</flux:navlist.item>
+
                     </flux:navlist.group>
                     
                     <flux:navlist.group :heading="__('Atendimento')" class="grid mt-4 text-slate-400">
