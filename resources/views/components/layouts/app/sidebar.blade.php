@@ -18,10 +18,16 @@
             
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse mb-8 pl-2" wire:navigate>
-                <img src="{{ asset('img/logo.png') }}" alt="ATLVS" class="h-10 w-auto drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+            <a href="{{ auth()->user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}" class="me-5 flex items-center space-x-3 rtl:space-x-reverse mb-8 pl-4" wire:navigate>
+                
+                {{-- A Logo --}}
+                <img src="{{ asset('img/logo.png') }}" alt="ATLVS" class="h-9 w-auto drop-shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+                
+                {{-- MUDANÇA: Texto "ATLVS" adicionado ao lado --}}
+              <span class="text-2xl font-bold text-slate-100 tracking-widest drop-shadow-md font-['Outfit'] uppercase">ATLVS</span>
+
                 @if(auth()->user()->role === 'admin')
-                    <span class="text-[10px] uppercase bg-slate-800 text-blue-400 px-2 py-0.5 rounded border border-blue-500/30 tracking-wider shadow-[0_0_10px_rgba(59,130,246,0.2)]">Admin</span>
+                    <span class="text-[9px] uppercase bg-slate-800 text-blue-400 px-1.5 py-0.5 rounded border border-blue-500/30 tracking-wider shadow-[0_0_10px_rgba(59,130,246,0.2)] ml-1">Admin</span>
                 @endif
             </a>
 
