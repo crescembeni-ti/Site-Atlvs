@@ -74,6 +74,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     // 2. Leads (Contatos do Site)
     Route::get('/leads', [DashboardContactController::class, 'index'])->name('admin.leads');
     Route::patch('/leads/{contact}/toggle', [DashboardContactController::class, 'toggleRead'])->name('admin.leads.toggle');
+    Route::delete('/leads/{contact}', [DashboardContactController::class, 'destroy'])->name('admin.leads.destroy');
 
     // 3. Gestão de Projetos (Visão do Admin)
     Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
