@@ -9,6 +9,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController; // Controller do Cliente
 use App\Http\Controllers\ProjectCommentController;
+use App\Http\Controllers\FinanceiroController;
+use App\Http\Controllers\ContratosController;
 
 // Controllers do Admin
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
@@ -95,8 +97,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/meus-projetos/novo', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/meus-projetos', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/meus-projetos/{project}', [ProjectController::class, 'show'])->name('projects.show');
+
 });
 
+// Sidebar Gestão (Financeiro,Contratos e )
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/financeiro', [FinanceiroController::class, 'index'])
+        ->name('gestao.financeiro.index');
+    Route::get('contratos', [ContratosController::class, 'index'])->name('gestao.contratos.index');
+});
+    
 
 /*
 |--------------------------------------------------------------------------
