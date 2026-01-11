@@ -11,6 +11,7 @@ use App\Http\Controllers\ProjectController; // Controller do Cliente
 use App\Http\Controllers\ProjectCommentController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\ContratosController;
+use App\Http\Controllers\TicketController; // <--- ADICIONADO AQUI
 
 // Controllers do Admin
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
@@ -75,7 +76,6 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::patch('/leads/{contact}/toggle', [DashboardContactController::class, 'toggleRead'])->name('admin.leads.toggle');
 
     // 3. Gestão de Projetos (Visão do Admin)
-    // Note que usamos o AdminProjectController aqui
     Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
     Route::get('/projetos/{project}', [AdminProjectController::class, 'show'])->name('admin.projects.show');
     Route::put('/projetos/{project}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
@@ -97,8 +97,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/meus-projetos/novo', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/meus-projetos', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/meus-projetos/{project}', [ProjectController::class, 'show'])->name('projects.show');
+
+    // 3. Meus Chamados (Sistema de Tickets) <--- RECOLOCADO AQUI
+    Route::get('/meus-chamados', [TicketController::class, 'index'])->name('tickets.index');
+    Route::get('/meus-chamados/novo', [TicketController::class, 'create'])->name('tickets.create');
+    Route::post('/meus-chamados', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/meus-chamados/{ticket}', [TicketController::class, 'show'])->name('tickets.show');
+    Route::post('/meus-chamados/{ticket}/reply', [TicketController::class, 'reply'])->name('tickets.reply');
 });
     
+// Sidebar Gestão (Financeiro, Contratos)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/financeiro', [FinanceiroController::class, 'index'])
+        ->name('gestao.financeiro.index');
+    Route::get('contratos', [ContratosController::class, 'index'])->name('gestao.contratos.index');
+});
 
 /*
 |--------------------------------------------------------------------------

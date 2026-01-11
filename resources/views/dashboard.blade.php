@@ -91,10 +91,12 @@
 
         <div class="space-y-6">
             {{-- Botão Azul Intenso --}}
-            <div class="bg-blue-600 rounded-xl p-6 text-white shadow-lg shadow-blue-900/30 border border-blue-500/30">
+          <div class="bg-blue-600 rounded-xl p-6 text-white shadow-lg shadow-blue-900/30 border border-blue-500/30">
                 <h3 class="font-bold text-lg mb-2">Abrir Chamado</h3>
                 <p class="text-blue-100 text-sm mb-6">Precisa de ajuda técnica ou manutenção? Abra um ticket direto para nossa equipe.</p>
-                <a href="#" class="inline-block w-full bg-white text-blue-600 text-center py-2.5 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-sm">
+                
+                {{-- CORREÇÃO AQUI: Troque o href="#" pela rota correta --}}
+                <a href="{{ route('tickets.create') }}" class="inline-block w-full bg-white text-blue-600 text-center py-2.5 rounded-lg font-bold hover:bg-blue-50 transition-colors shadow-sm">
                     Iniciar Suporte &rarr;
                 </a>
             </div>
