@@ -79,42 +79,9 @@
                     </div>
                 </div>
 
-                {{-- Mensagens (Scrollável) --}}
+                {{-- Mensagens (Scrollável) COM POLLING --}}
                 <div id="messages-container" class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent z-10">
-                    
-                    {{-- Abertura do Ticket (Mensagem Inicial) --}}
-                    <div class="flex justify-end">
-                        <div class="max-w-[85%]">
-                            <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-[10px] font-bold text-slate-400 uppercase">Você</span>
-                                <span class="text-[10px] text-slate-600">{{ $ticket->created_at->format('H:i') }}</span>
-                            </div>
-                            <div class="bg-blue-600 text-white p-4 rounded-2xl rounded-tr-none shadow-md text-sm leading-relaxed">
-                                {{ $ticket->message }}
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Loop das Respostas --}}
-                    @foreach($ticket->messages as $msg)
-                        <div class="flex {{ $msg->user_id === auth()->id() ? 'justify-end' : 'justify-start' }}">
-                            <div class="max-w-[85%]">
-                                <div class="flex items-center gap-2 mb-1 {{ $msg->user_id === auth()->id() ? 'justify-end' : '' }}">
-                                    <span class="text-[10px] font-bold text-slate-400 uppercase">
-                                        {{ $msg->user_id === auth()->id() ? 'Você' : ($msg->user->role === 'admin' ? 'Suporte ATLVS' : $msg->user->name) }}
-                                    </span>
-                                    <span class="text-[10px] text-slate-600">{{ $msg->created_at->format('H:i') }}</span>
-                                </div>
-                                <div class="p-4 rounded-2xl shadow-md text-sm leading-relaxed 
-                                    {{ $msg->user_id === auth()->id() 
-                                        ? 'bg-blue-600 text-white rounded-tr-none' 
-                                        : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-tl-none' }}">
-                                    {{ $msg->message }}
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
+                    @include('tickets.partials.messages')
                 </div>
 
                 {{-- Formulário de Envio --}}
@@ -142,11 +109,37 @@
         </div>
     </div>
 
-    {{-- Script para rolar o chat para o final --}}
+    {{-- Script para rolar o chat para o final E ATUALIZAR (Polling) --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.getElementById('messages-container');
-            container.scrollTop = container.scrollHeight;
+            const ticketId = "{{ $ticket->id }}";
+
+            // Função para rolar para o final
+            function scrollToBottom() {
+                container.scrollTop = container.scrollHeight;
+            }
+
+            // Rola na primeira carga
+            scrollToBottom();
+
+            // Polling a cada 3 segundos
+            setInterval(() => {
+                fetch(`/meus-chamados/${ticketId}/messages`)
+                    .then(response => response.text())
+                    .then(html => {
+                        // Verifica se o usuário está perto do fim antes de atualizar
+                        // para não pular o scroll se ele estiver lendo mensagens antigas
+                        const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 100;
+
+                        container.innerHTML = html;
+
+                        if (isAtBottom) {
+                            scrollToBottom();
+                        }
+                    })
+                    .catch(error => console.error('Erro no polling:', error));
+            }, 3000);
         });
     </script>
 </x-layouts.app>
