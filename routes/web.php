@@ -77,6 +77,8 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->group(functio
     Route::delete('/leads/{contact}', [DashboardContactController::class, 'destroy'])->name('admin.leads.destroy');
 
     // 3. Gestão de Projetos (Visão do Admin)
+    Route::get('/admin/projetos/novo', [AdminProjectController::class, 'create'])->name('admin.projects.create');
+    Route::post('/admin/projetos', [AdminProjectController::class, 'store'])->name('admin.projects.store');
     Route::get('/projetos', [AdminProjectController::class, 'index'])->name('admin.projects.index');
     Route::get('/leads/{contact}', [DashboardContactController::class, 'show'])->name('admin.leads.show');
     Route::get('/projetos/{project}', [AdminProjectController::class, 'show'])->name('admin.projects.show');
@@ -109,6 +111,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/meus-projetos/{project}', [ProjectController::class, 'show'])->name('projects.show');
 
     // 3. Meus Chamados (Sistema de Tickets) <--- RECOLOCADO AQUI
+    Route::get('/orcamento', [TicketController::class, 'createQuote'])->name('tickets.create_quote');
     Route::get('/meus-chamados', [TicketController::class, 'index'])->name('tickets.index');
     Route::get('/meus-chamados/novo', [TicketController::class, 'create'])->name('tickets.create');
     Route::post('/meus-chamados', [TicketController::class, 'store'])->name('tickets.store');

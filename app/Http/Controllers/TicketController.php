@@ -25,6 +25,11 @@ class TicketController extends Controller
         return view('tickets.create');
     }
 
+    public function createQuote()
+    {
+        return view('tickets.create_quote');
+    }
+    
     // 3. Salvar o Chamado no Banco
     public function store(Request $request)
     {
@@ -32,6 +37,7 @@ class TicketController extends Controller
             'subject' => 'required|string|max:255',
             'priority' => 'required|in:baixa,media,alta',
             'message' => 'required|string',
+            'category' => 'nullable|string|in:suporte,orcamento',
         ]);
 
         Ticket::create([
@@ -39,10 +45,14 @@ class TicketController extends Controller
             'subject' => $validated['subject'],
             'priority' => $validated['priority'],
             'message' => $validated['message'],
+            'category' => $request->category ?? 'suporte',
             'status' => 'aberto',
         ]);
+            if ($request->category === 'orcamento') {
+             return redirect()->route('tickets.index')->with('success', 'Solicitação de orçamento enviada! Vamos analisar e responder em breve.');
+        }
 
-        return redirect()->route('tickets.index')->with('success', 'Chamado aberto com sucesso! Nossa equipe responderá em breve.');
+        return redirect()->route('tickets.index')->with('success', 'Chamado aberto com sucesso!');
     }
 
     // 4. Ver Detalhes do Chamado (Faremos o chat depois)
