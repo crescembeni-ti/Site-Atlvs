@@ -9,6 +9,7 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                {{-- Coluna da Esquerda: Textos --}}
                 <div class="max-w-2xl">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-semibold mb-6 uppercase tracking-wide shadow-sm shadow-blue-900/20">
                         <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
@@ -31,22 +32,17 @@
                     </div>
                 </div>
 
+                {{-- Coluna da Direita: Imagem do Painel --}}
                 <div class="relative">
-                    <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/50 shadow-2xl shadow-blue-900/10 backdrop-blur-sm">
-                        <div class="aspect-[4/3] flex items-center justify-center relative">
-                            {{-- Grid no fundo da imagem --}}
-                            <div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b1a_1px,transparent_1px),linear-gradient(to_bottom,#1e293b1a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-                            
-                            <div class="text-center p-8 z-10">
-                                <div class="w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                                    <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                                </div>
-                                <h3 class="text-xl font-bold text-white mb-2">Estrutura Escalável</h3>
-                                <p class="text-slate-400 text-sm">Sistemas preparados para<br>altas demandas e segurança.</p>
-                            </div>
-                        </div>
+                    <div class="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/50 shadow-2xl shadow-blue-900/10 backdrop-blur-sm group">
+                        {{-- AQUI ESTÁ A IMAGEM NOVA --}}
+                        <img src="{{ asset('img/img-equip.jpeg') }}" alt="Interface do Sistema ATLVS" class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.02]">
+                        
+                        {{-- Overlay sutil para garantir legibilidade/estilo dark --}}
+                        <div class="absolute inset-0 bg-gradient-to-tr from-slate-950/20 to-transparent pointer-events-none"></div>
                     </div>
-                    {{-- Sombra do card --}}
+                    
+                    {{-- Sombra do card (Elemento decorativo atrás) --}}
                     <div class="absolute -bottom-6 -right-6 w-full h-full border border-slate-800 rounded-2xl -z-10 bg-slate-950"></div>
                 </div>
             </div>
