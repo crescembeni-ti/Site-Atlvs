@@ -29,21 +29,21 @@
                 <div class="flex h-20 items-center justify-between md:justify-start">
                     
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{{ route('home') }}">
-                            {{-- Logo com brilho azulado para combinar --}}
-                            <img src="{{ asset('img/logo.png') }}" alt="Logo ATLVS" class="h-[25px] w-auto mr-5 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
+                        <a href="{{ route('home') }}" class="flex items-center">
+                            {{-- Logo com tamanho controlado e brilho azulado --}}
+                            <img src="{{ asset('img/logo.png') }}" alt="Logo ATLVS" class="h-10 w-auto mr-3 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)] object-contain">
+                            <span class="font-bold text-xl tracking-tight text-white">ATLVS</span>
                         </a>
-                        <a href="{{ route('home') }}" class="font-bold text-xl tracking-tight text-white z-10">ATLVS</a>
                     </div>
 
-                    <div class="hidden md:flex items-center w-full ml-16">
+                    <div class="hidden md:flex items-center flex-1 ml-12">
                         <div class="flex space-x-8">
                             <a href="{{ route('home') }}#solucoes" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Soluções</a>
                             <a href="{{ route('home') }}#setores" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">Setores</a>
                             <a href="{{ route('home') }}#sobre" class="text-sm font-medium text-slate-400 hover:text-white transition-colors">A Empresa</a>
                         </div>
 
-                        <div class="flex items-center gap-4 ml-auto">
+                        <div class="flex items-center gap-6 ml-auto">
                             @if (Route::has('login'))
                                 @auth
                                     <a href="{{ url('/dashboard') }}" class="text-sm font-medium text-slate-300 hover:text-white">Dashboard</a>

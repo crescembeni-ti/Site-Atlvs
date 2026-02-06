@@ -3,7 +3,7 @@
 @section('title', 'ATLVS - Sistemas e Soluções em Tecnologia')
 
 @section('content')
-    <section class="pt-32 pb-16 lg:pt-40 lg:pb-24 relative overflow-hidden">
+    <section class="pt-40 pb-16 lg:pt-48 lg:pb-24 relative overflow-hidden">
         {{-- Efeito de luz de fundo --}}
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/20 blur-[120px] rounded-full -z-10 opacity-60 pointer-events-none"></div>
 
