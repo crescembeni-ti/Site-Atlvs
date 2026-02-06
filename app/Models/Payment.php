@@ -3,20 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Ticket extends Model
+class Payment extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'user_id', 
-        'subject', 
-        'message', 
-        'status', 
-        'priority',
+        'user_id',
         'project_id',
-        'project_name',
-        'project_scope'
+        'amount',
+        'status',
+        'method',
+        'gateway_id',
+        'due_date',
+        'paid_at',
+    ];
+
+    protected $casts = [
+        'due_date' => 'date',
+        'paid_at' => 'datetime',
+        'amount' => 'decimal:2',
     ];
 
     public function user(): BelongsTo
@@ -27,10 +35,5 @@ class Ticket extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function messages(): HasMany
-    {
-        return $this->hasMany(TicketMessage::class);
     }
 }
